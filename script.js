@@ -19,27 +19,83 @@ const barbearia = {
   
   
 function buscaCortePorId(id) {
-}
+    let listaDeCortes = barbearia.cortes;
+    for(i = 0; i < listaDeCortes.length; i++){
+        if(id == listaDeCortes[i].id){
+            return listaDeCortes[i];
+        };
+    };
+    return 'Corte não encontrado';
+};
+
 
 function buscaBarbaPorId(id) {
-}
+    let listaDeCortes = barbearia.barbas;
+    for(i = 0; i < listaDeCortes.length; i++){
+        if(id == listaDeCortes[i].id){
+            return listaDeCortes[i];
+        };
+    };
+    return 'Barba não encontrada';
+};
+
 
 function verificaStatusBarbearia() {
-}
+    if(barbearia.estaAberto == true){
+        return 'Estamos abertos';
+    };
+    return 'Estamos fechados';
+};
 
 function retornaTodosCortes() {
-}
+    return barbearia.cortes
+};
 
 function retornaTodasBarbas() {
-}
+    return barbearia.barbas
+};
+
 
 function criaPedido(nomeCliente, corteId, barbaId) {
-}
+    let pedido= {};
+    pedido.nome = nomeCliente;
+    const corte = barbearia.cortes;
+    const barba = barbearia.barbas;
+    for(i = 0; i < corte.length; i++){
+        if(corte[i].id === corteId){
+            pedido.pedidoCorte = buscaCortePorId(corteId).tipo
+            pedido.pedidoCortePreco = buscaCortePorId(corteId).valor
+        };
+    };
+
+    for(i = 0; i < barba.length; i++){
+        if(barba[i].id === corteId){
+            pedido.pedidoBarba = buscaBarbaPorId(barbaId).tipo
+            pedido.pedidoBarbaPreco = buscaBarbaPorId(barbaId).valor
+        };
+    };
+    
+
+    return pedido
+};
+console.log(criaPedido('Lucas', 2, 5));
+
 
 function atualizarServico(lista, id, valor, tipo) {
-}
+    for(i = 0; i < lista.length; i++){
+        if(id === lista[i].id){
+            lista[i].valor = valor
+            lista[i].tipo = tipo
+        };
+    };
+    return lista
+}; 
 
 function calculaTotal(pedido) {
-}
-  
-  
+    let soma = 0
+    soma += pedido.pedidoBarbaPreco
+    soma += pedido.pedidoCortePreco
+    return soma
+};
+
+console.log(calculaTotal(criaPedido('Lucas', 2, 5)))
